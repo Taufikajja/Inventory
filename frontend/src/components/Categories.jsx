@@ -8,7 +8,7 @@ const Categories = () => {
  
     const handleSubmit = async (e) => {
         e.preventDefault();
-    const response = await axios.post("http://localhost:3000/api/category/add", 
+    const response = await axios.post('http://localhost:3000/api/category/add', 
         { categoryName, categoryDescription },
         {
             headers: {
@@ -21,7 +21,7 @@ const Categories = () => {
         setCategoryName("");
         setCategoryDescription("");
     } else {
-        console.error("error adding category:", data);
+        console.error("error adding category:", response.data);
         alert("Error adding category. Please try again");
     }
     };
@@ -49,7 +49,7 @@ const Categories = () => {
                     </div>
                     <button 
                     type="submit"
-                    className="w-full rounded-md bg-green-500 text-white p-3 cursor-pointer hover:bg-green "
+                    className="w-full rounded-md bg-green-500 text-white p-3 cursor-pointer hover:bg-green-700"
                     >Add Category</button>
                 </form>
             </div>
