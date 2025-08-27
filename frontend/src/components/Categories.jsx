@@ -8,8 +8,8 @@ const Categories = () => {
  
     const handleSubmit = async (e) => {
         e.preventDefault();
-    const response = await axios.post('http://localhost:3000/api/category/add', 
-        { categoryName, categoryDescription },
+        const response = await axios.post('http://localhost:3000/api/category/add', 
+            { categoryName, categoryDescription },
         {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("pos-token")}`,
