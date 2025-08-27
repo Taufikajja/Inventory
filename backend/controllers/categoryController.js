@@ -1,5 +1,6 @@
+import Category from '../models/Category.js';
 
-const add = async (req, res) => {
+const addCategory = async (req, res) => {
     try {
         const {categoryName, categoryDescription} = req.body;
         
@@ -8,13 +9,14 @@ const add = async (req, res) => {
             return res.status(400).json({ success: false, message:'Category already exists'});
         }
 
+        // create a new category
         const newCategory = new Category({
             categoryName,
             categoryDescription,
         });
 
         await newCategory.save();
-        return res.status(201).json({ success:true,message:'Category added successfully', data})
+        return res.status(201).json({ success:true,message:'Category added successfully'});
     } catch (error) {
         console.error('Error adding category:', error);
         return res.status(500).json({ success: false, message: "Server error"});
