@@ -171,6 +171,7 @@ if (confirmDelete) {
                 <tr className="bg-gray-100">
                     <th className="border border-gray-200 p-2">No</th>
                     <th className="border border-gray-200 p-2">Category Name</th>
+                    <th className="border border-gray-200 p-2">Category Description</th>
                     <th className="border border-gray-200 p-2">Action</th>
                 </tr>
             </thead>
@@ -180,6 +181,7 @@ if (confirmDelete) {
                 <tr key={category._id || index}>
                     <td className="border border-gray-200 p-2">{index + 1}</td>
                     <td className="border border-gray-200 p-2">{category.categoryName}</td>
+                    <td className="border border-gray-200 p-2">{category.categoryDescription}</td>
                     <td className="border border-gray-200 p-2">
                         <button className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 mr-2" onClick={() => handleEdit(category)}
                             >

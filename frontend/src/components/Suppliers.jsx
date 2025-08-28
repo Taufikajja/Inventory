@@ -5,7 +5,7 @@ const Suppliers = () => {
     const [addEditModal, setAddEditModal] = useState(null);
 
   return (
-    <div className = 'w-full h-full flex flex-col gap-4 p-4'>
+  /*  <div className = 'w-full h-full flex flex-col gap-4 p-4'>
         <h1 className = 'text-xl font-bold'>Suppliers Management</h1>
         <div className= 'flex justify-between items-center'>
             <input type="text" placeholder='Search' className='border p-1 bg-white rounded px-4' />
@@ -22,8 +22,9 @@ const Suppliers = () => {
                       <input type="text" placeholder='Supplier Description' className='border p-1 bg-white rounded px-4' />
                 </form>
             </div>
-        )}
-    </div>
+        )} 
+    </div> */
+    <div></div>
   )
 }
 

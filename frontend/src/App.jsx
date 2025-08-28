@@ -6,6 +6,8 @@ import ProtectedRoutes from './utils/ProtectedRoutes'
 import Dashboard from './pages/Dashboard'
 import Categories from './components/Categories'
 import Suppliers from './components/Suppliers'
+import Logout from './pages/Logout'
+import DashboardCpn from './components/dashboard_cpn'
 
 function App() {
   
@@ -20,11 +22,15 @@ function App() {
       >
           <Route 
             index
-            element= {<h1>Summary of dashboard</h1>} 
+            element={<h1>{<DashboardCpn />}</h1>}
           />
           <Route 
             path="categories"
             element={<h1>{<Categories/>}</h1>}
+          />
+          <Route
+            path="logout"
+            element={<Logout />}
           />
           <Route
             path="products"
@@ -32,7 +38,7 @@ function App() {
           />
           <Route
             path="suppliers"
-            element={<h1>{<Suppliers/>}</h1>}
+            element={<h1>suppliers</h1>}
           />
           <Route
             path="orders"
@@ -48,7 +54,7 @@ function App() {
           />
           <Route
             path="logout"
-            element={<h1>Logout</h1>}
+            element={<h1></h1>}
           />
         </Route>
         <Route path="/customer/dashboard" element={<h1>customer dashboard</h1>} />
