@@ -23,4 +23,14 @@ const addCategory = async (req, res) => {
     }
 }
 
-export {addCategory};
+const getCategories = async (req, res) => {
+    try {
+        const categories = await Category.find();
+        return res.status(200).json ({success: true, categories });
+    } catch (error) {
+        console.error('error fetching categories:', error);
+        return res.status(500).json ({ success: false, message: 'Server error in getting categories'});
+    }
+}
+
+export {addCategory, getCategories};
