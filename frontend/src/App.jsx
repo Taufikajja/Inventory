@@ -57,7 +57,7 @@ function App() {
             element={<h1></h1>}
           />
         </Route>
-        <Route path="/customer/dashboard" element={<h1>customer dashboard</h1>} />
+        <Route path="/customer-dashboard" element={<h1>customer dashboard</h1>} />
         <Route path="/login" element={<Login />} />
         <Route path="/unauthorized" element={<p className='font-bold text-3xl mt-20 ml-20'>Unauthorized</p>} />
       </Routes>
