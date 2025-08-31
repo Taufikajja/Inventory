@@ -26,7 +26,7 @@ function App() {
           />
           <Route 
             path="categories"
-            element={<h1>{<Categories/>}</h1>}
+            element={<Categories/>}
           />
           <Route
             path="logout"
@@ -38,7 +38,7 @@ function App() {
           />
           <Route
             path="suppliers"
-            element={<h1>suppliers</h1>}
+            element={<Suppliers />}
           />
           <Route
             path="orders"

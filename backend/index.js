@@ -9,6 +9,7 @@ app.use(cors());
 app.use(express.json());
 app.use('/api/auth', authRoutes);
 app.use('/api/category', categoryRoutes);
+app.use('/api/supplier', supplierRoutes);
 
 app.listen(process.env.PORT, () => {
     connectDB();
