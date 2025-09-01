@@ -8,6 +8,8 @@ import Categories from './components/Categories'
 import Suppliers from './components/Suppliers'
 import Logout from './pages/Logout'
 import DashboardCpn from './components/dashboard_cpn'
+import Products from './components/Products'
+
 
 function App() {
   
@@ -29,12 +31,8 @@ function App() {
             element={<Categories/>}
           />
           <Route
-            path="logout"
-            element={<Logout />}
-          />
-          <Route
             path="products"
-            element={<h1>Products</h1>}
+            element={<Products />}
           />
           <Route
             path="suppliers"
@@ -54,7 +52,7 @@ function App() {
           />
           <Route
             path="logout"
-            element={<h1></h1>}
+            element={<Logout />}
           />
         </Route>
         <Route path="/customer-dashboard" element={<h1>customer dashboard</h1>} />
