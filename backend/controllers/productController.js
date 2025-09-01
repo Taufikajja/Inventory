@@ -26,9 +26,10 @@ const addProduct = async (req, res) => {
 
 const getProducts = async (req, res) => {
     try {
+        const products = await Product.find().populate('categoryId').populate('supplierId');
         const suppliers = await Supplier.find();
         const categories = await Category.find();
-        return res.status(200).json({ success: true, suppliers, categories });
+        return res.status(200).json({ success: true, products, suppliers, categories });
     } catch (error) {
         console.error('error fetching suppliers:', error);
         return res.status(500).json({ success: false, message: 'Server error in getting suppliers' });

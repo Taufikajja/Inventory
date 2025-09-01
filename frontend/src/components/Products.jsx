@@ -6,6 +6,7 @@ const Products = () => {
     const [ openModal, setOpenModal] = useState(false);
     const [ categories, setCategories] = useState([]);
     const [suppliers, setSuppliers] = useState([]);
+    const [products, setProducts] = useState([]);
     const [ formData, setFormData] = useState({
         name: "",
         description: "",
@@ -24,8 +25,14 @@ const Products = () => {
                     Authorization: `Bearer ${localStorage.getItem("pos-token")}`,
                 },
             });
-            setSuppliers(response.data.suppliers);
-            setCategories(response.data.categories);
+            if(response.data.success) {
+                setSuppliers(response.data.suppliers);
+                setCategories(response.data.categories);
+                setProducts(response.data.products);
+            } else {
+                console.error("Error fetching products:", response.data.message);
+                alert("Error fetching products. please try again ");
+            }
         } catch (error) {
             console.error("Error fetching suppliers:", error);
         }
@@ -93,6 +100,57 @@ const Products = () => {
                     Add Product
                   </button>
           </div>
+
+          <div>
+              <table className="w-full border-collapse border border-gray-300 mt-4">
+                  <thead>
+                      <tr className="bg-gray-200">
+                          <th className="border border-gray-300 p-2">S No</th>
+                          <th className="border border-gray-300 p-2">Product Name</th>
+                          <th className="border border-gray-300 p-2">Category Name</th>
+                          <th className="border border-gray-300 p-2">Supplier Name</th>
+                          <th className="border border-gray-300 p-2">Price</th>
+                          <th className="border border-gray-300 p-2">Stock</th>
+                          <th className="border border-gray-300 p-2">Action</th>
+
+                      </tr>
+                  </thead>
+                  <tbody>
+                      {products.map((product, index) => (
+                          <tr key={product._id}>
+                              <td className="border border-gray-300 p-2">{index + 1}</td>
+                              <td className="border border-gray-300 p-2">{product.name}</td>
+                              <td className="border border-gray-300 p-2">{product.categoryId.categoryName}</td>
+                              <td className="border border-gray-300 p-2">{product.supplierId.name}</td>
+                              <td className="border border-gray-300 p-2">Rp.{product.price},00</td>
+                              <td className="border border-gray-300 p-2">
+                                <span className="rounded-full font-semibold">
+                                {product.stock == 0 ? (
+                                    <span className="bg-red-100 text-red-500 px-2 py-1 rounded-full">{product.stock}</span>
+                                ) : product.stock < 5 ? (
+                                    <span className="bg-yellow-100 text-yellow-600 px-2 py-1 rounded-full">{product.stock}</span>
+                                 ) : (
+                                    <span className="bg-green-100 text-green-500 px-2 py-1 rounded-full">{product.stock}</span>
+                                )}
+                                </span>
+                                </td>
+                              <td className="border border-gray-300 p-2">
+                                  <button className="px-2 py-1 bg-yellow-500 text-white rounded cursor-pointer mr-2"
+                                      onClick={() => handleEdit(product)}>
+                                      Edit
+                                  </button>
+                                  <button className="px-2 py-1 bg-red-500 text-white rounded cursor-pointer"
+                                      onClick={() => handleDelete(product._id)}>
+                                      Delete
+                                  </button>
+                              </td>
+                          </tr>
+                      ))}
+                  </tbody>
+              </table>
+              {/* {filteredSuppliers.length === 0 && <div>No Record</div>} */}
+          </div>
+
           { openModal && (
               <div className='fixed top-0 left-0 w-full h-full bg-black/50 flex justify-center items-center'>
                   <div className='bg-white p-4 rounded shadow-md w-1/3 relative'>
