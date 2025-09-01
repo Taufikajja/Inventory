@@ -183,10 +183,10 @@ if (confirmDelete) {
                     <td className="border border-gray-200 p-2">{category.categoryName}</td>
                     <td className="border border-gray-200 p-2">{category.categoryDescription}</td>
                     <td className="border border-gray-200 p-2">
-                        <button className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 mr-2" onClick={() => handleEdit(category)}
+                        <button className="px-2 py-1 bg-yellow-500 text-white rounded cursor-pointer mr-2" onClick={() => handleEdit(category)}
                             >
                                 Edit</button>
-                        <button className="bg-red-500 text-white p-2 rounded-md hover:bg-red-600"
+                        <button className="px-2 py-1 bg-red-500 text-white rounded cursor-pointer mr-2"
                         onClick = {() => handleDelete(category._id)}>Delete</button>
                     </td>
                 </tr>
