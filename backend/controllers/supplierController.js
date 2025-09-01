@@ -62,7 +62,7 @@ const deleteSupplier = async (req, res) => {
     try {
         const { id } = req.params;
 
-        //check if the category exists
+        //check if the supplier exists
         const existingSupplier = await Supplier.findById(id);
         if (!existingSupplier) {
             return res.status(404).json({ success: false, message: 'supplier not found' });
