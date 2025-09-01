@@ -4,6 +4,7 @@ import axios from 'axios'
 
 const Products = () => {
     const [ openModal, setOpenModal] = useState(false);
+    const [ editProduct, setEditProduct ] = useState(null);
     const [ categories, setCategories] = useState([]);
     const [suppliers, setSuppliers] = useState([]);
     const [products, setProducts] = useState([]);
@@ -50,9 +51,68 @@ const Products = () => {
         }));
     }
 
+    const handleEdit = (product) => {
+        setOpenModal(true);
+        setEditProduct(product._id);
+        setFormData ({
+           name: product.name,
+           description: product.description,
+           price: product.price,
+           stock: product.stock,
+           categoryId: product.categoryId._id, 
+           supplierId: product.supplierId._id, 
+        });
+        };
+
+    const closeModel = () => {
+        setOpenModal(false);
+        setEditProduct(null);
+        setFormData({
+            name: "",
+            description: "",
+            price: "",
+            stock: "",
+            categoryId: "",
+        })
+    }
+    
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        if(editProduct) {
+            try {
+                const response = await axios.put(
+                `http://localhost:3000/api/products/${editProduct}`,
+                formData,
+                {
+                    headers: {
+                    Authorization: `Bearer ${localStorage.getItem("pos-token")}`,
+                    },
+                }
+                );
+                if (response.data.success) {
+                alert("Product updated successfully!");
+                fetchProducts();
+                setOpenModal(false);
+                setEditProduct(null);
+                setFormData({
+                    name: "",
+                    description: "",
+                    price: "",
+                    stock: "",
+                    categoryId: "",
+                    supplierId: "",
+                }); 
+                } else {
+                    alert("Error updating Product. Pleasse try again.");
+                }
+            } catch (error) {
+                alert("Error updating Product. Please try again.");
+            }
+            return;
+        } 
+        else {
             try {
                 const response = await axios.post('http://localhost:3000/api/products/add',
                     formData,
@@ -63,7 +123,7 @@ const Products = () => {
                     }
                 );
                 if (response.data.success) {
-                    // fetchSuppliers();
+                    fetchProducts();
                     alert("Products added successfully !");
                     setOpenModal(false);
                     setFormData({
@@ -81,6 +141,7 @@ const Products = () => {
             } catch (error) {
                 // console.error("Error adding product:", error.message);
                 alert("Error adding product. Please try again");
+        }
         }
     };
 
@@ -157,7 +218,7 @@ const Products = () => {
                       <h1 className='text-xl font-bold'>Add Product</h1>
                       <button 
                       className='absolute top-4 right-4 font-bold text-lg cursor-pointer' 
-                      onClick={() => setOpenModal(false)}
+                      onClick={closeModel}
                       >
                         X
                         </button>
@@ -225,14 +286,14 @@ const Products = () => {
                                   type="submit"
                                   className="w-full mt-2 rounded-md bg-green-500 text-white p-3 cursor-pointer hover:bg-green-700"
                               >
-                                  Add Product
+                                  {editProduct ? "Save Changes" : "Add Product"}
                               </button>
                             
                     
                                       <button
                                           type="button"
                                           className="w-full mt-2 rounded-md bg-red-500 text-white p-3 cursor-pointer hover:bg-red-600"
-                                          onClick={() => setOpenModal(false)}
+                                          onClick={closeModel}
                                       >
                                           Cancel
                                       </button>
